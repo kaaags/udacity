@@ -208,7 +208,7 @@ SELECT *
   WHERE name NOT LIKE '%s'
   ORDER BY name;
 
---40. Quiz: AND or BETWEEN %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--43. Quiz: AND or BETWEEN %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 /*
 1. Write a query that returns all the orders where the standard_qty is over 1000, the poster_qty is 0, and the gloss_qty is 0.
@@ -233,3 +233,9 @@ SELECT *
 /*
 3. Use the web_events table to find all information regarding individuals who were contacted via organic or adwords and started their account at any point in 2016 sorted from newest to oldest.
 */
+
+SELECT *
+  FROM web_events
+  WHERE occurred_at BETWEEN '2016-01-01' AND '2016-12-31' AND
+    channel IN ('organic', 'adwords')
+  ORDER BY occurred_at DESC;
