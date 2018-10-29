@@ -157,3 +157,35 @@ SELECT name, primary_poc, sales_rep_id
 SELECT *
   FROM web_events
   WHERE channel IN ('organic', 'adwords');
+
+--40. Quiz: NOT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/*
+1. We can pull all of the rows that were excluded from the queries in the previous two concepts with our new operator.
+
+1.01. Use the accounts table to find the account name, primary poc, and sales rep id for all stores except Walmart, Target, and Nordstrom.
+*/
+
+SELECT name, primary_poc, sales_rep_id
+  FROM accounts
+  WHERE name NOT IN ('Walmart', 'Target', 'Nordstrom')
+  ORDER BY name;
+
+/*
+1.02. Use the web_events table to find all information regarding individuals who were contacted via any method except using organic or adwords methods.
+Use the accounts table to find:
+*/
+
+/*
+2. Use the accounts table to find:
+
+2.01. All the companies whose names do not start with 'C'.
+*/
+
+/*
+2.02. All companies whose names do not contain the string 'one' somewhere in the name.
+*/
+
+/*
+2.03. All companies whose names do not end with 's'.
+*/
