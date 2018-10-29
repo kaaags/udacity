@@ -248,8 +248,8 @@ SELECT *
 
 SELECT id
   FROM orders
-  WHERE gloss_qty >= 4000
-    OR poster_qty >= 4000;
+  WHERE gloss_qty > 4000
+    OR poster_qty > 4000;
 
 /*
 2. Write a query that returns a list of orders where the standard_qty is zero and either the gloss_qty or poster_qty is over 1000.
@@ -267,6 +267,6 @@ SELECT *
 SELECT *
   FROM accounts
   WHERE (name LIKE 'C%' OR name LIKE 'W%')
-    AND (primary_poc LIKE '%ana%' OR primary_poc LIKE '%Ana%')
-    AND primary_poc NOT LIKE '%eana%'
+    AND ((primary_poc LIKE '%ana%' OR primary_poc LIKE '%Ana%')
+    AND primary_poc NOT LIKE '%eana%')
     ORDER BY name;
