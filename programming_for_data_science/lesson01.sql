@@ -109,3 +109,22 @@ SELECT
   account_id,
   poster_amt_usd / (standard_amt_usd + gloss_amt_usd + poster_amt_usd + 0.0001) AS poster_perc_rev
   FROM orders;
+
+--34. LIKE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/*
+1. All the companies whose names start with 'C'.
+*/
+
+SELECT *
+  FROM accounts
+  WHERE name LIKE 'C%'
+  ORDER BY name;
+
+/*
+All companies whose names contain the string 'one' somewhere in the name.
+*/
+
+/*
+All companies whose names end with 's'.
+*/
