@@ -133,3 +133,8 @@ SELECT *
 /*
 All companies whose names end with 's'.
 */
+
+SELECT *
+  FROM accounts
+  WHERE name LIKE '%s'
+  ORDER BY name;
