@@ -202,3 +202,8 @@ SELECT *
 /*
 2.03. All companies whose names do not end with 's'.
 */
+
+SELECT *
+  FROM accounts
+  WHERE name NOT LIKE '%s'
+  ORDER BY name;
