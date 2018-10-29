@@ -176,6 +176,10 @@ SELECT name, primary_poc, sales_rep_id
 Use the accounts table to find:
 */
 
+SELECT *
+  FROM web_events
+  WHERE channel NOT IN ('organic', 'adwords');
+
 /*
 2. Use the accounts table to find:
 
