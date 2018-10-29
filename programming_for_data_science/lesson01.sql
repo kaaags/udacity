@@ -43,7 +43,7 @@ SELECT id, account_id, total
 1. Write a query that returns the top 5 rows from orders ordered according to newest to oldest, but with the largest total_amt_usd for each date listed first for each date. You will notice each of these dates shows up as unique because of the time element. When you learn about truncating dates in a later lesson, you will better be able to tackle this question on a day, month, or yearly basis.
 */
 
-SELECT total_amt_usd, occurred_at
+SELECT *
   FROM orders
   ORDER BY occurred_at DESC, total_amt_usd DESC
   LIMIT 5;
@@ -52,7 +52,22 @@ SELECT total_amt_usd, occurred_at
 2. Write a query that returns the top 10 rows from orders ordered according to oldest to newest, but with the smallest total_amt_usd for each date listed first for each date. You will notice each of these dates shows up as unique because of the time element. When you learn about truncating dates in a later lesson, you will better be able to tackle this question on a day, month, or yearly basis.
 */
 
-SELECT occurred_at, total_amt_usd
+SELECT *
   FROM orders
   ORDER BY occurred_at, total_amt_usd
   LIMIT 10;
+
+  --24. WHERE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/*
+1. Pull the first 5 rows and all columns from the orders table that have a dollar amount of gloss_amt_usd greater than or equal to 1000.
+*/
+
+SELECT *
+  FROM orders
+  WHERE gloss_amt_usd >= 1000
+  LIMIT 5;
+
+/*
+2. Pull the first 10 rows and all columns from the orders table that have a total_amt_usd less than 500.
+*/
