@@ -194,6 +194,11 @@ SELECT *
 2.02. All companies whose names do not contain the string 'one' somewhere in the name.
 */
 
+SELECT *
+  FROM accounts
+  WHERE name NOT LIKE '%one%'
+  ORDER BY name;
+
 /*
 2.03. All companies whose names do not end with 's'.
 */
