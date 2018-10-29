@@ -227,7 +227,7 @@ SELECT *
 SELECT *
   FROM accounts
   WHERE name NOT LIKE 'C%' AND
-    name NOT LIKE '%s'
+    name LIKE '%s'
   ORDER BY name;
 
 /*
@@ -236,6 +236,6 @@ SELECT *
 
 SELECT *
   FROM web_events
-  WHERE occurred_at BETWEEN '2016-01-01' AND '2016-12-31' AND
+  WHERE occurred_at BETWEEN '2016-01-01' AND '2017-01-01' AND
     channel IN ('organic', 'adwords')
   ORDER BY occurred_at DESC;
