@@ -173,7 +173,6 @@ SELECT name, primary_poc, sales_rep_id
 
 /*
 1.02. Use the web_events table to find all information regarding individuals who were contacted via any method except using organic or adwords methods.
-Use the accounts table to find:
 */
 
 SELECT *
@@ -185,6 +184,11 @@ SELECT *
 
 2.01. All the companies whose names do not start with 'C'.
 */
+
+SELECT *
+  FROM accounts
+  WHERE name NOT LIKE 'C%'
+  ORDER BY name;
 
 /*
 2.02. All companies whose names do not contain the string 'one' somewhere in the name.
