@@ -224,6 +224,12 @@ SELECT *
 2. Using the accounts table find all the companies whose names do not start with 'C' and end with 's'.
 */
 
+SELECT *
+  FROM accounts
+  WHERE name NOT LIKE 'C%' AND
+    name NOT LIKE '%s'
+  ORDER BY name;
+
 /*
 3. Use the web_events table to find all information regarding individuals who were contacted via organic or adwords and started their account at any point in 2016 sorted from newest to oldest.
 */
