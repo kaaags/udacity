@@ -122,8 +122,13 @@ SELECT *
   ORDER BY name;
 
 /*
-All companies whose names contain the string 'one' somewhere in the name.
+2. All companies whose names contain the string 'one' somewhere in the name.
 */
+
+SELECT *
+  FROM accounts
+  WHERE name LIKE '%one%'
+  ORDER BY name;
 
 /*
 All companies whose names end with 's'.
