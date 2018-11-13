@@ -67,3 +67,14 @@ SELECT  r.name AS region_name,
 /*
 3. Provide the name for each region for every order, as well as the account name and the unit price they paid (total_amt_usd/total) for the order. Your final table should have 3 columns: region name, account name, and unit price. A few accounts have 0 for total, so I divided by (total + 0.01) to assure not dividing by zero.
 */
+
+SELECT r.name AS region_name,
+        a.name AS account_name,
+        o.total_amt_usd / (o.total + 0.0001) AS unit_price
+    FROM accounts AS a
+      JOIN sales_reps s
+        ON a.sales_rep_id = s.id
+      JOIN region r
+        ON s.region_id = r.id
+      JOIN orders o
+        ON a.id = o.account_id
