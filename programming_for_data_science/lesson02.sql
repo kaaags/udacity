@@ -175,13 +175,15 @@ SELECT  r.name region_name,
         ON  s.id = a.sales_rep_id
       JOIN  orders o
         ON  a.id = o.account_id
-  WHERE standard_qty > 100
-    AND poster_qty > 50
+  WHERE o.standard_qty > 100
+    AND o.poster_qty > 50
   ORDER BY unit_price DESC;
 
 /*
 7. What are the different channels used by account id 1001? Your final table should have only 2 columns: account name and the different channels. You can try SELECT DISTINCT to narrow down the results to only the unique values.
 */
+
+
 
 /*
 8. Find all the orders that occurred in 2015. Your final table should have 4 columns: occurred_at, account name, order total, and order total_amt_usd.
