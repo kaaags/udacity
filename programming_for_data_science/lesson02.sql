@@ -183,7 +183,12 @@ SELECT  r.name region_name,
 7. What are the different channels used by account id 1001? Your final table should have only 2 columns: account name and the different channels. You can try SELECT DISTINCT to narrow down the results to only the unique values.
 */
 
-
+SELECT DISTINCT a.name account_name,
+                w.channel
+    FROM  accounts a
+      JOIN  web_events w
+        ON  a.id = w.account_id
+  WHERE a.id = 1001;
 
 /*
 8. Find all the orders that occurred in 2015. Your final table should have 4 columns: occurred_at, account name, order total, and order total_amt_usd.
