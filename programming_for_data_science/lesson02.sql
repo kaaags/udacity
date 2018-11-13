@@ -26,3 +26,14 @@ SELECT orders.standard_qty, orders.gloss_qty, orders.poster_qty, accounts.websit
   FROM orders
   JOIN accounts
   ON orders.account_id = accounts.id;
+
+--9. Text + Quiz: JOIN Revisited %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/*
+1. Use the image above to assist you. If we wanted to join the sales_reps and region tables together, how would you do it?
+*/
+
+SELECT sales_reps.*, region.*
+  FROM sales_reps
+  JOIN region
+  ON sales_reps.region_id = region.id;
