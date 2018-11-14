@@ -615,9 +615,9 @@ SELECT  a.name,
 */
 
 SELECT  s.name,
-        o.total,
+        COUNT(*)  num_orders,
         CASE
-          WHEN  SUM(o.total) > 200
+          WHEN  COUNT(*) > 200
             THEN  'Top'
           ELSE  'Not'
           END AS  performance_level
@@ -626,10 +626,12 @@ SELECT  s.name,
         ON  s.id = a.sales_rep_id
       JOIN  orders o
         ON  a.id = o.account_id
-  GROUP BY  1,
-            2
+  GROUP BY  1
   ORDER BY  2 DESC;
 
 /*
 6. The previous didn't account for the middle, nor the dollar amount associated with the sales. Management decides they want to see these characteristics represented as well. We would like to identify top performing sales reps, which are sales reps associated with more than 200 orders or more than 750000 in total sales. The middle group has any rep with more than 150 orders or 500000 in sales. Create a table with the sales rep name, the total number of orders, total sales across all orders, and a column with top, middle, or low depending on this criteria. Place the top sales people based on dollar amount of sales first in your final table. You might see a few upset sales people by this criteria!
 */
+
+SELECT  s.name,
+        o.total,
