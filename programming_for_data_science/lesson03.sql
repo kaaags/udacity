@@ -329,7 +329,17 @@ SELECT  COUNT(*) num_reps_above5
 2. How many accounts have more than 20 orders?
 */
 
-
+SELECT  COUNT(*) num_accounts_above20
+    FROM( SELECT  a.id,
+                  a.name,
+                  COUNT(*) num_orders
+              FROM  accounts a
+                JOIN  orders o
+                  ON  a.id = account_id
+            GROUP BY  a.id,
+                      a.name
+            HAVING  COUNT(*) > 20
+            ORDER BY  num_orders) AS Table1;
 
 /*
 3. Which account has the most orders?
