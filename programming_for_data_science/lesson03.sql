@@ -546,20 +546,18 @@ SELECT  DATE_TRUNC('month', o.occurred_at) ord_date,
 */
 
 SELECT  o.account_id,
-        o.total_amt_usd,
+        o.total,
         CASE WHEN o.total_amt_usd >= 3000
             THEN  'Large'
           ELSE  'Small'
           END AS order_level
-    FROM  orders o
-  GROUP BY  1,
-            2;
+    FROM  orders o;
 
 /*
 2. Write a query to display the number of orders in each of three categories, based on the 'total' amount of each order. The three categories are: 'At Least 2000', 'Between 1000 and 2000' and 'Less than 1000'.
 */
 
-
+SELECT
 
 /*
 3. We would like to understand 3 different levels of customers based on the amount associated with their purchases. The top level includes anyone with a Lifetime Value (total sales of all orders) greater than 200,000 usd. The second level is between 200,000 and 100,000 usd. The lowest level is anyone under 100,000 usd. Provide a table that includes the level associated with each account. You should provide the account name, the total sales of all orders for the customer, and the level. Order with the top spending customers listed first.
