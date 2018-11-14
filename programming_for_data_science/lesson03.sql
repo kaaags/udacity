@@ -406,7 +406,16 @@ SELECT  a.id,
 7. Which account has spent the least with us?
 */
 
-
+SELECT  a.id,
+        a.name,
+        SUM(o.total_amt_usd) amt_spent
+    FROM  accounts a
+      JOIN  orders o
+        ON  o.account_id = a.id
+  GROUP BY  a.id,
+            a.name
+  ORDER BY  amt_spent
+  LIMIT 1;
 
 /*
 8. Which accounts used facebook as a channel to contact customers more than 6 times?
