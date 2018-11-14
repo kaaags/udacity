@@ -593,7 +593,22 @@ SELECT  a.name,
 4. We would now like to perform a similar calculation to the first, but we want to obtain the total amount spent by customers only in 2016 and 2017. Keep the same levels as in the previous question. Order with the top spending customers listed first.
 */
 
-
+SELECT  a.name,
+        SUM(o.total_amt_usd) total_sales,
+        CASE
+          WHEN  SUM(o.total_amt_usd) > 200000
+            THEN  'Top'
+          WHEN  SUM(o.total_amt_usd) > 100000
+            AND SUM(o.total_amt_usd) <= 200000
+            THEN  'Mid'
+          ELSE  'Low'
+          END AS  customer_level
+    FROM  orders o
+      JOIN  accounts a
+        ON  o.account_id = a.id
+  WHERE o.occurred_at > '2015-12-31'
+  GROUP BY  1
+  ORDER BY total_sales DESC;
 
 /*
 5. We would like to identify top performing sales reps, which are sales reps associated with more than 200 orders. Create a table with the sales rep name, the total number of orders, and a column with top or not depending on if they have more than 200 orders. Place the top sales people first in your final table.
