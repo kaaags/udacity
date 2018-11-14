@@ -480,10 +480,21 @@ SELECT  DATE_TRUNC('year', o.occurred_at) AS year,
   ORDER BY  yearly_total DESC;
 
 /*
+Yes. Aside from they year 2017, sales have increased year over year. If sales figures for 2017 are incomplete, 2017 may continue the trend and eclipse 2016's sales figures.
+*/
+
+/*
 2. Which month did Parch & Posey have the greatest sales in terms of total dollars? Are all months evenly represented by the dataset?
 */
 
+SELECT  DATE_PART('month', o.occurred_at) AS month,
+        SUM(o.total_amt_usd) AS monthly_total
+    FROM  orders o
+  GROUP BY  DATE_PART('month', o.occurred_at)
+  ORDER BY  monthly_total DESC;
 
+/*
+December has significantly greater sales than the rest of the year. However, the first and last years in the database are incomplete; resulting in incomplete representation of the months.
 
 /*
 3. Which year did Parch & Posey have the greatest sales in terms of total number of orders? Are all years evenly represented by the dataset?
