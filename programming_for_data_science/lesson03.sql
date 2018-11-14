@@ -634,4 +634,24 @@ SELECT  s.name,
 */
 
 SELECT  s.name,
-        o.total,
+        COUNT(*) num_orders,
+        SUM(o.total_amt_usd) total_sales,
+        CASE
+          WHEN  COUNT(*) > 200
+            AND SUM(o.total_amt_usd) > 750000
+            THEN  'top'
+          WHEN  COUNT(*) > 150
+            AND COUNT(*) <= 200
+            AND SUM(o.total_amt_usd) > 500000
+            AND SUM(o.total_amt_usd) <= 750000
+            THEN  'mid'
+          ELSE  'low'
+          END AS  performance_level
+    FROM  sales_reps s
+      JOIN  accounts a
+        ON  s.id = a.sales_rep_id
+      JOIN  orders o
+        ON  a.id = o.account_id
+  GROUP BY  1
+  ORDER BY  3 DESC,
+            2 DESC;
