@@ -527,3 +527,14 @@ December was again the month with the greatest number; this time of orders. No, 
 /*
 5. In which month of which year did Walmart spend the most on gloss paper in terms of dollars?
 */
+
+SELECT  DATE_TRUNC('month', o.occurred_at) ord_date,
+        SUM(o.gloss_amt_usd) month_gloss_amt_usd
+    FROM  orders o
+      JOIN  accounts a
+        ON  o.account_id = a.id
+  GROUP BY  1,
+            a.name
+  HAVING  a.name IN('Walmart')
+  ORDER BY 2 DESC
+  LIMIT 1;
