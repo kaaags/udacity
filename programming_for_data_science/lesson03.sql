@@ -514,7 +514,15 @@ SELECT  DATE_TRUNC('year', o.occurred_at) ord_year,
 4. Which month did Parch & Posey have the greatest sales in terms of total number of orders? Are all months evenly represented by the dataset?
 */
 
+SELECT  DATE_PART('month', o.occurred_at) ord_month,
+        COUNT(*) total_orders
+    FROM  orders o
+  GROUP BY  1
+  ORDER BY  2 DESC;
 
+/*
+December was again the month with the greatest number; this time of orders. No, all months were not equally represented by the dataset.
+*/
 
 /*
 5. In which month of which year did Walmart spend the most on gloss paper in terms of dollars?
