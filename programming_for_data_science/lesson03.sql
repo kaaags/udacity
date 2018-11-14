@@ -391,7 +391,16 @@ SELECT  COUNT(*)  num_accounts_below1k_usd
 6. Which account has spent the most with us?
 */
 
-
+SELECT  a.id,
+        a.name,
+        SUM(o.total_amt_usd) total_spent
+    FROM  orders o
+      JOIN  accounts a
+        ON  a.id = o.account_id
+  GROUP BY  a.id,
+            a.name
+  ORDER BY  total_spent DESC
+  LIMIT 1;
 
 /*
 7. Which account has spent the least with us?
