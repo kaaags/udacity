@@ -500,7 +500,15 @@ December has significantly greater sales than the rest of the year. However, the
 3. Which year did Parch & Posey have the greatest sales in terms of total number of orders? Are all years evenly represented by the dataset?
 */
 
+SELECT  DATE_TRUNC('year', o.occurred_at) ord_year,
+        COUNT(*) total_orders
+    FROM  orders o
+  GROUP BY  1
+  ORDER BY  2 DESC;
 
+/*
+2016 was the year with the greatest total number of orders. No, all years were not evenly represented.
+*/
 
 /*
 4. Which month did Parch & Posey have the greatest sales in terms of total number of orders? Are all months evenly represented by the dataset?
