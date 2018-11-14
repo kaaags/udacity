@@ -279,3 +279,100 @@ SELECT  DISTINCT  id,
 /*
 2. Have any sales reps worked on more than one account?
 */
+
+SELECT  s.id AS "sales rep id",
+        s.name AS "sales rep name",
+        COUNT(*) AS num_accounts
+    FROM sales_reps s
+      JOIN  accounts a
+        ON  s.id = sales_rep_id
+  GROUP BY  s.id,
+            s.name
+  ORDER BY  num_accounts;
+
+SELECT  DISTINCT  id,
+                  name
+    FROM  sales_reps;
+
+--23. Quiz: HAVING %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/*
+1. How many of the sales reps have more than 5 accounts that they manage?
+*/
+
+SELECT  s.id,
+        s.name,
+        COUNT(*) num_accounts
+    FROM  accounts a
+      JOIN  sales_reps s
+        ON  s.id = a.sales_rep_id
+  GROUP BY  s.id,
+            s.name
+  HAVING  COUNT(*) > 5
+  ORDER BY num_accounts;
+
+--or
+
+SELECT  COUNT(*) num_reps_above5
+    FROM( SELECT  s.id,
+                  s.name,
+                  COUNT(*) num_accounts
+              FROM  accounts a
+                JOIN  sales_reps s
+                  ON  s.id = a.sales_rep_id
+            GROUP BY  s.id,
+                      s.name
+            HAVING  COUNT(*) > 5
+            ORDER BY  num_accounts) AS Table1;
+
+/*
+2. How many accounts have more than 20 orders?
+*/
+
+
+
+/*
+3. Which account has the most orders?
+*/
+
+
+
+/*
+4. How many accounts spent more than 30,000 usd total across all orders?
+*/
+
+
+
+/*
+5. How many accounts spent less than 1,000 usd total across all orders?
+*/
+
+
+
+/*
+6. Which account has spent the most with us?
+*/
+
+
+
+/*
+7. Which account has spent the least with us?
+*/
+
+
+
+/*
+8. Which accounts used facebook as a channel to contact customers more than 6 times?
+*/
+
+
+
+/*
+9. Which account used facebook most as a channel?
+*/
+
+
+
+/*
+10. Which channel was most frequently used by most accounts?
+*/
