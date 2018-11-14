@@ -455,3 +455,14 @@ SELECT  a.id,
 /*
 10. Which channel was most frequently used by most accounts?
 */
+
+SELECT  w.channel,
+        COUNT(*) use_by_accounts
+    FROM  web_events w
+      JOIN  accounts a
+        ON  a.id = w.account_id
+  GROUP BY  w.channel,
+            a.id,
+            a.name
+  ORDER BY  use_by_accounts DESC
+  LIMIT 1;
