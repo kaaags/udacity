@@ -227,7 +227,16 @@ SELECT  a.name,
 3. Determine the number of times a particular channel was used in the web_events table for each sales rep. Your final table should have three columns - the name of the sales rep, the channel, and the number of occurrences. Order your table with the highest number of occurrences first.
 */
 
-
+SELECT  s.name,
+        w.channel,
+        COUNT(w.channel) AS channel_occurrences
+    FROM  sales_reps s
+      JOIN  accounts a
+        ON  s.id = a.sales_rep_id
+      JOIN  web_events w
+        ON  a.id = w.account_id
+  GROUP BY  s.name, w.channel
+  ORDER BY  channel_occurrences DESC;
 
 /*
 4. Determine the number of times a particular channel was used in the web_events table for each region. Your final table should have three columns - the region name, the channel, and the number of occurrences. Order your table with the highest number of occurrences first.
