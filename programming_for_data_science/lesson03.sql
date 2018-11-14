@@ -345,7 +345,15 @@ SELECT  COUNT(*) num_accounts_above20
 3. Which account has the most orders?
 */
 
-
+SELECT  a.id,
+        a.name,
+        COUNT(*)  num_orders
+    FROM  orders o
+      JOIN  accounts a
+        ON  o.account_id = a.id
+  GROUP BY  a.id, a.name
+  ORDER BY  num_orders DESC
+  LIMIT 1;
 
 /*
 4. How many accounts spent more than 30,000 usd total across all orders?
