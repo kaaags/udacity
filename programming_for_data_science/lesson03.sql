@@ -25,7 +25,9 @@ SELECT  SUM(o.total_amt_usd) AS grand_total_amt_usd
 4. Find the total amount spent on standard_amt_usd and gloss_amt_usd paper for each order in the orders table. This should give a dollar amount for each order in the table.
 */
 
-
+SELECT  o.id,
+        o.standard_amt_usd + o.gloss_amt_usd AS standard_and_gloss_total_amt_usd
+    FROM  orders o;
 
 /*
 5. Find the standard_amt_usd per unit of standard_qty paper. Your solution should use both an aggregation and a mathematical operator.
