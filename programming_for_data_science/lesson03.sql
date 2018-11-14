@@ -65,7 +65,10 @@ SELECT  MAX(w.occurred_at) AS most_recent_web_event
 4. Try to perform the result of the previous query without using an aggregation function.
 */
 
-
+SELECT  w.occurred_at AS most_recent_web_event
+    FROM  web_events w
+  ORDER BY w.occurred_at DESC
+  LIMIT 1;
 
 /*
 5. Find the mean (AVERAGE) amount spent per order on each paper type, as well as the mean amount of each paper type purchased per order. Your final answer should have 6 values - one for each paper type for the average number of sales, as well as the average amount.
