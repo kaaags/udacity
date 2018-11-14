@@ -11,7 +11,8 @@ SELECT  SUM(o.poster_qty) AS poster_total
 2. Find the total amount of standard_qty paper ordered in the orders table.
 */
 
-
+SELECT  SUM(o.standard_qty) AS standard_total
+    FROM  orders o;
 
 /*
 3. Find the total dollar amount of sales using the total_amt_usd in the orders table.
