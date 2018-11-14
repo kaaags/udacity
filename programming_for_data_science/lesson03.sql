@@ -49,7 +49,10 @@ SELECT  MIN(o.occurred_at) AS earliest_order
 Try performing the same query as in question 1 without using an aggregation function.
 */
 
-
+SELECT o.occurred_at AS earliest_order
+    FROM  orders o
+  ORDER BY  o.occurred_at
+  LIMIT 1;
 
 /*
 When did the most recent (latest) web_event occur?
