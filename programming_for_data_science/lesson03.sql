@@ -439,7 +439,18 @@ SELECT  a.id,
 9. Which account used facebook most as a channel?
 */
 
-
+SELECT  a.id,
+        a.name,
+        COUNT(*) use_of_facebook
+    FROM  accounts a
+      JOIN  web_events w
+        ON  a.id = w.account_id
+  GROUP BY  a.id,
+            a.name,
+            w.channel
+  HAVING    w.channel = 'facebook'
+  ORDER BY  use_of_facebook DESC
+  LIMIT 1;
 
 /*
 10. Which channel was most frequently used by most accounts?
