@@ -359,7 +359,17 @@ SELECT  a.id,
 4. How many accounts spent more than 30,000 usd total across all orders?
 */
 
-
+SELECT  COUNT(*)  num_accounts_above30k_usd
+    FROM( SELECT  a.id,
+                  a.name,
+                  COUNT(*) total_spent
+              FROM  accounts a
+                JOIN  orders o
+                  ON  a.id = o.account_id
+            GROUP BY  a.id,
+                      a.name
+            HAVING  SUM(o.total_amt_usd) > 30000
+            ORDER BY total_spent) AS Table1;
 
 /*
 5. How many accounts spent less than 1,000 usd total across all orders?
