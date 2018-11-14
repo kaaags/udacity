@@ -164,7 +164,12 @@ SELECT  w.channel,
 5. Who was the primary contact associated with the earliest web_event?
 */
 
-
+SELECT  a.primary_poc
+    FROM  accounts a
+      JOIN  web_events w
+        ON  a.id = w.account_id
+  ORDER BY w.occurred_at
+  LIMIT 1;
 
 /*
 6. What was the smallest order placed by each account in terms of total usd. Provide only two columns - the account name and the total usd. Order from smallest dollar amounts to largest.
