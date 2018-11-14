@@ -86,11 +86,26 @@ SELECT  AVG(o.standard_amt_usd) AS mean_standard_amt_usd,
 6. Via the video, you might be interested in how to calculate the MEDIAN. Though this is more advanced than what we have covered so far try finding - what is the MEDIAN total_usd spent on all orders?
 */
 
---1st find the median_count
+--1st figure out if the count is even or odd
+SELECT COUNT(o.total_amt_usd) AS count
+    FROM orders o;
+
+--2nd must find the 3456th and 3457th values and divide them together
+SELECT  *
+    FROM  ( SELECT o.total_amt_usd
+                FROM  orders o
+              ORDER BY  total_amt_usd
+              LIMIT 3457) AS Table1
+  ORDER BY total_amt_usd DESC
+  LIMIT 2;
+--3rd divide the numbers to find the median
+SELECT  (2483.16 + 2482.55) / 2 AS median_total_amt_usd;
+
+--If an odd count, find the median_o
 SELECT  CEILING(COUNT(o.total_amt_usd) / 2) AS median_count
     FROM  orders o;
 
---2nd use the median_count as the OFFSET value $2,483.16
+--2nd use the median_count as the OFFSET value
 SELECT  o.total_amt_usd AS median_total_amt_usd
     FROM  orders o
   ORDER BY  o.total_amt_usd
