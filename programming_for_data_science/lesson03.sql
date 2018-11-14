@@ -255,3 +255,27 @@ SELECT  r.name,
   GROUP BY  r.name,
             w.channel
   ORDER BY  channel_occurrences DESC;
+
+--20. Quiz: DISTINCT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/*
+1. Use DISTINCT to test if there are any accounts associated with more than one region.
+*/
+
+SELECT  a.id AS "account id",
+        r.id AS "region id",
+        a.name AS "account name",
+        r.name AS "region name"
+    FROM  accounts a
+      JOIN  sales_reps s
+        ON  a.sales_rep_id = s.id
+      JOIN  region r
+        ON  s.region_id = r.id;
+
+SELECT  DISTINCT  id,
+                  name
+    FROM  accounts;
+
+/*
+2. Have any sales reps worked on more than one account?
+*/
