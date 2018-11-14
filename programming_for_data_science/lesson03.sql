@@ -74,7 +74,13 @@ SELECT  w.occurred_at AS most_recent_web_event
 5. Find the mean (AVERAGE) amount spent per order on each paper type, as well as the mean amount of each paper type purchased per order. Your final answer should have 6 values - one for each paper type for the average number of sales, as well as the average amount.
 */
 
-
+SELECT  AVG(o.standard_amt_usd) AS mean_standard_amt_usd,
+        AVG(o.gloss_amt_usd) AS mean_gloss_amt_usd,
+        AVG(o.poster_amt_usd) AS mean_poster_amt_usd,
+        AVG(o.standard_qty) AS mean_standard_qty,
+        AVG(o.gloss_qty) AS mean_gloss_qty,
+        AVG(o.poster_qty) AS mean_poster_qty
+    FROM  orders o;
 
 /*
 6. Via the video, you might be interested in how to calculate the MEDIAN. Though this is more advanced than what we have covered so far try finding - what is the MEDIAN total_usd spent on all orders?
