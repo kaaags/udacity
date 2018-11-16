@@ -10,7 +10,7 @@ SELECT  DATE_TRUNC('day', w.occurred_at) AS day,
     FROM  web_events w
   GROUP BY  1,
             2
-  ORDER BY  1;
+  ORDER BY  3 DESC;
 
 /*
 2. Now create a subquery that simply provides all of the data from your first query.
