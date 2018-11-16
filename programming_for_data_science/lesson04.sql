@@ -38,4 +38,4 @@ SELECT  channel,
             GROUP BY  1, 2
             ) sub
   GROUP BY  1
-  ORDER BY  1 DESC;
+  ORDER BY  1;
