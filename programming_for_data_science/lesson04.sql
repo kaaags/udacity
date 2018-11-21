@@ -68,3 +68,50 @@ SELECT  AVG(standard_qty) AS monthly_avg_standard,
   (SELECT  DATE_TRUNC('month',MIN(occurred_at)) AS min
     FROM  orders
   );
+
+--10. Quiz: Subquery Mania %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/*
+1. Provide the name of the sales_rep in each region with the largest amount of total_amt_usd sales.
+*/
+
+SELECT  sr.name sales_rep,
+        r.name region,
+        MAX(total_amt_usd) max_total
+  FROM  sales_reps sr
+  JOIN  region r
+  ON    sr.region_id = r.id
+  JOIN  accounts a
+  ON    sr.id = a.sales_rep_id
+  JOIN  orders o
+  ON    a.id = o.account_id
+  GROUP BY  1,2
+  ORDER BY  1;
+
+/*
+2. For the region with the largest (sum) of sales total_amt_usd, how many total (count) orders were placed?
+*/
+
+
+
+/*
+3. For the name of the account that purchased the most (in total over their lifetime as a customer) standard_qty paper, how many accounts still had more in total purchases?
+*/
+
+
+
+/*
+4. For the customer that spent the most (in total over their lifetime as a customer) total_amt_usd, how many web_events did they have for each channel?
+*/
+
+
+
+/*
+5. What is the lifetime average amount spent in terms of total_amt_usd for the top 10 total spending accounts?
+*/
+
+
+
+/*
+6. What is the lifetime average amount spent in terms of total_amt_usd for only the companies that spent more than the average of all orders.
+*/
