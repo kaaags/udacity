@@ -75,18 +75,23 @@ SELECT  AVG(standard_qty) AS monthly_avg_standard,
 1. Provide the name of the sales_rep in each region with the largest amount of total_amt_usd sales.
 */
 
-SELECT  sr.name sales_rep,
-        r.name region,
-        MAX(total_amt_usd) max_total
-  FROM  sales_reps sr
-  JOIN  region r
-  ON    sr.region_id = r.id
-  JOIN  accounts a
-  ON    sr.id = a.sales_rep_id
-  JOIN  orders o
-  ON    a.id = o.account_id
+SELECT  t1.sales_rep,
+        t1.region,
+        MAX(sales_rep_total)
+  FROM  (SELECT sr.name sales_rep,
+                r.name region,
+                SUM(total_amt_usd) sales_rep_total
+          FROM  sales_reps sr
+          JOIN  region r
+          ON    sr.region_id = r.id
+          JOIN  accounts a
+          ON    sr.id = a.sales_rep_id
+          JOIN  orders o
+          ON    a.id = o.account_id
+          GROUP BY  1,2) t1
   GROUP BY  1,2
   ORDER BY  1;
+
 
 /*
 2. For the region with the largest (sum) of sales total_amt_usd, how many total (count) orders were placed?
