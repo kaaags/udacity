@@ -39,3 +39,24 @@ SELECT  channel,
             ) sub
   GROUP BY  1
   ORDER BY  1;
+
+--7. Quiz: More on Subqueries %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/*
+1. Use DATE_TRUNC to pull month level information about the first order ever placed in the orders table.
+*/
+
+SELECT  DATE_TRUNC('month',MIN(occurred_at)) AS min
+  FROM  orders
+
+/*
+2. Use the result of the previous query to find only the orders that took place in the same month and year as the first order, and then pull the average for each type of paper qty in this month.
+*/
+
+SELECT  *
+  FROM  orders
+  WHERE DATE_TRUNC('month',occurred_at) =
+  (SELECT  DATE_TRUNC('month',MIN(occurred_at)) AS min
+    FROM  orders
+    )
+  ORDER BY  occurred_at;
