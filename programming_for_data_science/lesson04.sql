@@ -59,12 +59,12 @@ SELECT  *
 2. Use the result of the previous query to find only the orders that took place in the same month and year as the first order, and then pull the average for each type of paper qty in this month.
 */
 
-SELECT  AVG()*
+SELECT  AVG(standard_qty) AS monthly_avg_standard,
+        AVG(gloss_qty) AS monthly_avg_glossy,
+        AVG(poster_qty) AS monthly_avg_poster,
+        SUM(total_amt_usd) AS sum_total_amt_usd
   FROM  orders
-  WHERE DATE_TRUNC('year',occurred_at) =
-    AND DATE_TRUNC('month',occurred_at) =
+  WHERE DATE_TRUNC('month',occurred_at) =
   (SELECT  DATE_TRUNC('month',MIN(occurred_at)) AS min
     FROM  orders
-    )
-  ORDER BY  occurred_at
-  LIMIT 1;
+  );
