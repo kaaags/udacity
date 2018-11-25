@@ -139,7 +139,7 @@ SELECT  r.name,
   HAVING SUM(o.total_amt_usd) = (
     SELECT MAX(total_amt)
       FROM (SELECT  r.name region_name,
-            SUM(o.total_amt_usd) total_amt
+                    SUM(o.total_amt_usd) total_amt
             FROM region r
             JOIN sales_reps sr
             ON r.id = region_id
@@ -153,7 +153,22 @@ SELECT  r.name,
 3. For the name of the account that purchased the most (in total over their lifetime as a customer) standard_qty paper, how many accounts still had more in total purchases?
 */
 
-
+SELECT COUNT(*) count
+  FROM (SELECT a.name
+        FROM accounts a
+        JOIN orders o
+        ON a.id = o.account_id
+        GROUP BY 1
+        HAVING SUM(o.total) >
+          (SELECT total
+            FROM (SELECT a.name account_name, SUM(o.standard_qty) total_standard, SUM(o.total) total
+                  FROM accounts a
+                  JOIN orders o
+                  ON a.id = o.account_id
+                  GROUP BY 1
+                  ORDER BY 2 DESC
+                LIMIT 1) inner_tab)
+        ) counter_tab;
 
 /*
 4. For the customer that spent the most (in total over their lifetime as a customer) total_amt_usd, how many web_events did they have for each channel?
