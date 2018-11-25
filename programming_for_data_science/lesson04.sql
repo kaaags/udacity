@@ -110,7 +110,44 @@ ON t3.region = t3.region AND t3.total_sales = t2.total_sales;
 2. For the region with the largest (sum) of sales total_amt_usd, how many total (count) orders were placed?
 */
 
+SELECT  r.name region_name,
+        SUM(o.total_amt_usd) sum_sales,
+        COUNT(o.total) total_orders
+  FROM region r
+  JOIN sales_reps sr
+  ON r.id = sr.region_id
+  JOIN accounts a
+  ON sr.id = a.sales_rep_id
+  JOIN orders o
+  ON a.id = o.account_id
+  GROUP BY 1
+  ORDER BY 2 DESC
+  LIMIT 1;
 
+--OR
+
+SELECT  r.name,
+        COUNT(o.total) total_orders
+  FROM region r
+  JOIN sales_reps sr
+  ON r.id = region_id
+  JOIN accounts a
+  ON sr.id = a.sales_rep_id
+  JOIN orders o
+  ON a.id = o.account_id
+  GROUP BY 1
+  HAVING SUM(o.total_amt_usd) = (
+    SELECT MAX(total_amt)
+      FROM (SELECT  r.name region_name,
+            SUM(o.total_amt_usd) total_amt
+            FROM region r
+            JOIN sales_reps sr
+            ON r.id = region_id
+            JOIN accounts a
+            ON sr.id = a.sales_rep_id
+            JOIN orders o
+            ON a.id = o.account_id
+            GROUP BY 1) sub);
 
 /*
 3. For the name of the account that purchased the most (in total over their lifetime as a customer) standard_qty paper, how many accounts still had more in total purchases?
