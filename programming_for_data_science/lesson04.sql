@@ -205,3 +205,12 @@ SELECT AVG(total_spend) average_spend
 /*
 6. What is the lifetime average amount spent in terms of total_amt_usd for only the companies that spent more than the average of all orders.
 */
+
+SELECT AVG(avg_amount)
+  FROM (SELECT o.account_id, AVG(o.total_amt_usd) avg_amount
+        FROM orders o
+        GROUP BY 1
+        HAVING AVG(o.total_amt_usd) > (SELECT AVG(o.total_amt_usd)
+                                        FROM accounts a
+                                        JOIN orders o
+                                        ON a.id = o.account_id)) t1;
