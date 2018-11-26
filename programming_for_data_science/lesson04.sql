@@ -193,7 +193,14 @@ SELECT a.name, we.channel, COUNT(*)
 5. What is the lifetime average amount spent in terms of total_amt_usd for the top 10 total spending accounts?
 */
 
-
+SELECT AVG(total_spend) average_spend
+  FROM (SELECT a.id, a.name, SUM(o.total_amt_usd) total_spend
+          FROM accounts a
+          JOIN orders o
+          ON a.id = o.account_id
+          GROUP BY 1, 2
+          ORDER BY 3 DESC
+          LIMIT 10) t1;
 
 /*
 6. What is the lifetime average amount spent in terms of total_amt_usd for only the companies that spent more than the average of all orders.
