@@ -319,7 +319,7 @@ SELECT a.name account_name, we.channel, COUNT(we.id) total_web_events
 */
 
 WITH t1 AS (
-  SELECT a.id, a.name, SUM(total_amt_usd) total_spent
+  SELECT a.id, a.name, SUM(o.total_amt_usd) total_spent
     FROM accounts a
     JOIN orders o
     ON a.id = o.account_id
@@ -332,3 +332,43 @@ SELECT AVG(total_spent) avg_spent
 /*
 6. What is the lifetime average amount spent in terms of total_amt_usd for only the companies that spent more than the average of all accounts.
 */
+
+/*
+my initial wrong answer follows:
+
+WITH t1 AS (
+  SELECT a.id account_id, a.name account_name, SUM(o.total_amt_usd) total_spent
+    FROM accounts a
+    JOIN orders o
+    ON a.id = o.account_id
+    GROUP BY 1, 2),
+  t2 AS (
+    SELECT AVG(total_spent) total_avg_spent
+      FROM t1),
+  t3 AS (
+    SELECT a.id account_id, a.name account_name, SUM(o.total_amt_usd) total_spent
+      FROM t1
+      JOIN t2
+      GROUP BY 1, 2
+      HAVING SUM(o.total_amt_usd) > (SELECT total_avg_spent FROM t2))
+SELECT a.id account_id, a.name account_name, AVG(total_spent) above_avg_spent
+  FROM accounts a
+  JOIN orders o
+  ON a.id = o.account_id
+    AND t1.total_spent = t3.total_spent
+  GROUP BY 1, 2
+  ORDER BY 1;
+*/
+
+WITH t1 AS (
+  SELECT AVG (o.total_amt_usd) avg_all
+    FROM orders o
+    JOIN accounts a
+    ON a.id = o.account_id),
+  t2 AS (
+    SELECT o.account_id, AVG(o.total_amt_usd) avg_amt
+      FROM orders o
+      GROUP BY 1
+      HAVING AVG(o.total_amt_usd) > (SELECT * FROM t1))
+SELECT AVG(avg_amt)
+  FROM t2;
