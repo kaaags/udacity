@@ -60,3 +60,21 @@ SELECT  SUM(vowel) vowels,
           FROM accounts a) t1;
 
 -- 80/351 (or 22.8% of) company names start with a vowel. 77.2% (or 271) of company names start with any other character.
+
+--6. Quiz: POSITION, STRPOS, & SUBSTR - AME DATA AS QUIZ 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/*
+1. Use the accounts table to create first and last name columns that hold the first and last names for the primary_poc.
+*/
+
+SELECT  LEFT(a.primary_poc, STRPOS(a.primary_poc, ' ') -1) first_name,
+        RIGHT(a.primary_poc, LENGTH(a.primary_poc) - STRPOS(a.primary_poc, ' ')) last_name
+  FROM  accounts a;
+
+/*
+2. Now see if you can do the same thing for every rep name in the sales_reps table. Again provide first and last name columns.
+*/
+
+SELECT  LEFT(sr.name, STRPOS(sr.name, ' ') -1) first_name,
+        RIGHT(sr.name, LENGTH(sr.name) - STRPOS(sr.name, ' ')) last_name
+  FROM  sales_reps sr;
