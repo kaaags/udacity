@@ -139,8 +139,12 @@ SELECT *
 
 SELECT  scd.date orig_date,
         SUBSTR(scd.date, 7, 4) || '-' || SUBSTR(scd.date, 1, 2) || '-' || SUBSTR(scd.date, 4, 2) AS new_date
-  FROM sf_crime_data scd;
+  FROM  sf_crime_data scd;
 
 /*
 5. Once you have created a column in the correct format, use either CAST or :: to convert this to a date.
 */
+
+SELECT  scd.date orig_date,
+        CAST(SUBSTR(scd.date, 7, 4) || '-' || SUBSTR(scd.date, 1, 2) || '-' || SUBSTR(scd.date, 4, 2) AS DATE) new_date
+  FROM  sf_crime_data scd;
