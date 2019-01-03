@@ -231,3 +231,12 @@ SELECT  COALESCE(a.id, a.id) filled_id,
   LEFT JOIN orders o
   ON  a.id = o.account_id
   WHERE o.total IS NULL;
+
+/*
+5. Run the query in 1 with the WHERE removed and COUNT the number of ids.
+*/
+
+SELECT  COUNT(*)
+FROM accounts a
+LEFT JOIN orders o
+ON a.id = o.account_id;
