@@ -43,3 +43,20 @@ SELECT SUM(num) nums, SUM(letter) letters
 /*
 4. Consider vowels as a, e, i, o, and u. What proportion of company names start with a vowel, and what percent start with anything else?
 */
+
+SELECT  SUM(vowel) vowels,
+        SUM(other) others
+  FROM (SELECT name,
+          CASE WHEN LEFT(UPPER(a.name), 1)
+            IN ('A','E','I','O','U')
+            THEN 1
+            ELSE 0
+            END AS vowel,
+          CASE WHEN LEFT(UPPER(a.name), 1)
+            IN ('A','E','I','O','U')
+            THEN 0
+            ELSE 1
+            END AS other
+          FROM accounts a) t1;
+
+-- 80/351 (or 22.8% of) company names start with a vowel. 77.2% (or 271) of company names start with any other character.
