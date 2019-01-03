@@ -14,7 +14,7 @@ SELECT  RIGHT(a.website, 3) AS domain,
 2. There is much debate about how much the name (or even the first letter of a company name) matters. Use the accounts table to pull the first letter of each company name to see the distribution of company names that begin with each letter (or number).
 */
 
-SELECT  LEFT(UPPER(name), 1) AS first _letter,
+SELECT  LEFT(UPPER(a.name), 1) AS first_letter,
         COUNT(*) num_companies
   FROM accounts a
   GROUP BY 1
