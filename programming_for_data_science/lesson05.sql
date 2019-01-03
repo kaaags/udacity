@@ -148,3 +148,32 @@ SELECT  scd.date orig_date,
 SELECT  scd.date orig_date,
         CAST(SUBSTR(scd.date, 7, 4) || '-' || SUBSTR(scd.date, 1, 2) || '-' || SUBSTR(scd.date, 4, 2) AS DATE) new_date
   FROM  sf_crime_data scd;
+
+--15. Quiz: COALESCE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/*
+1. Run the query entered below in the SQL workspace to notice the row with the missing data.
+*/
+
+SELECT *
+FROM accounts a
+LEFT JOIN orders o
+ON a.id = o.account_id
+WHERE o.total IS NULL;
+
+/*
+2. Use COALESCE to fill in the accounts.id column with the account.id for the NULL value for the table in 1.
+*/
+
+SELECT  COALESCE(a.id, a.id) filled_id,
+        a.name,
+        a.website,
+        a.lat,
+        a.long,
+        a.primary_poc,
+        a.sales_rep_id,
+        o.*
+  FROM accounts a
+  LEFT JOIN orders o
+  ON a.id = o.account_id
+  WHERE o.total IS NULL;
