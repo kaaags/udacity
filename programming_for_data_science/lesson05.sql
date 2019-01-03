@@ -38,6 +38,8 @@ SELECT SUM(num) nums, SUM(letter) letters
             END AS letter
           FROM accounts a) t1;
 
+--Answer: 350/351 (or 99.7% of) company names start with a letter.
+
 /*
 4. Consider vowels as a, e, i, o, and u. What proportion of company names start with a vowel, and what percent start with anything else?
 */
