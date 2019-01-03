@@ -122,3 +122,21 @@ SELECT  first_name,
         last_name,
         CONCAT(LEFT(first_name, 1), RIGHT(first_name, 1), LEFT(last_name, 1), RIGHT(last_name, 1), LENGTH(first_name), LENGTH(last_name), UPPER(REPLACE(name, ' ', ''))) first_password
   FROM t1;
+
+--12. Quiz: CAST %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/*
+1. Write a query to look at the top 10 rows to understand the columns and the raw data in the dataset called sf_crime_data.
+*/
+
+SELECT *
+  FROM sf_crime_data scd
+  LIMIT 10;
+
+/*
+4. Write a query to change the date into the correct SQL date format. You will need to use at least SUBSTR and CONCAT to perform this operation.
+*/
+
+/*
+5. Once you have created a column in the correct format, use either CAST or :: to convert this to a date.
+*/
