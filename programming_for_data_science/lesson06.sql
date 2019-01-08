@@ -53,3 +53,15 @@ SELECT o.id,
 /*
 2. Now remove ORDER BY DATE_TRUNC('month',occurred_at) in each line of the query that contains it in the SQL Explorer below. Evaluate your new query, compare it to the results in the SQL Explorer above, and answer the subsequent quiz questions.
 */
+
+SELECT o.id,
+       o.account_id,
+       o.standard_qty,
+       DATE_TRUNC('month',o.occurred_at) AS month,
+       DENSE_RANK() OVER (PARTITION BY o.account_id ) AS dense_rank,
+       SUM(o.standard_qty) OVER (PARTITION BY o.account_id) AS sum_std_qty,
+       COUNT(o.standard_qty) OVER (PARTITION BY o.account_id) AS count_std_qty,
+       AVG(o.standard_qty) OVER (PARTITION BY o.account_id) AS avg_std_qty,
+       MIN(o.standard_qty) OVER (PARTITION BY o.account_id) AS min_std_qty,
+       MAX(o.standard_qty) OVER (PARTITION BY o.account_id) AS max_std_qty
+  FROM orders o;
