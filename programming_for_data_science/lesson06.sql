@@ -18,3 +18,15 @@ SELECT o.standard_amt_usd,
        DATE_TRUNC('year',o.occurred_at) AS year,
        SUM(o.standard_amt_usd) OVER (PARTITION BY DATE_TRUNC('year',o.occurred_at) ORDER BY o.occurred_at) AS running_total
   FROM orders o;
+
+--8. Quiz: ROW_NUMBER & RANK %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/*
+1. Select the id, account_id, and total variable from the orders table, then create a column called total_rank that ranks this total amount of paper ordered (from highest to lowest) for each account using a partition. Your final table should have these four columns.
+*/
+
+SELECT o.id,
+       o.account_id,
+       o.total,
+       RANK() OVER (PARTITION BY o.account_id ORDER BY o.total DESC) AS total_rank
+  FROM orders o;
